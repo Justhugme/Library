@@ -16,6 +16,7 @@ public class Author {
     private Set<Book> books;
     private Date birthdayDate;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
@@ -42,6 +43,7 @@ public class Author {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     @ManyToMany(mappedBy = "authors")
     @JsonIgnore
     public Set<Book> getBooks() {

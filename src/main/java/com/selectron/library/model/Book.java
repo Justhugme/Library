@@ -1,5 +1,7 @@
 package com.selectron.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.net.URL;
 import java.util.Set;
@@ -17,6 +19,10 @@ public class Book {
     private String description;
     private URL icon;
     private URL url;
+    private Set<Comment> comments;
+
+    public Book() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +42,8 @@ public class Book {
     public void setName(String name) {
         this.name = name;
     }
+
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     public Set<Author> getAuthors() {
@@ -100,5 +108,14 @@ public class Book {
 
     public void setUrl(URL url) {
         this.url = url;
+    }
+
+    @OneToMany(mappedBy = "book")
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
