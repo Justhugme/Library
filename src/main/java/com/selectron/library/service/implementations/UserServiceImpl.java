@@ -1,10 +1,11 @@
-package com.selectron.library.service;
+package com.selectron.library.service.implementations;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
 import com.selectron.library.model.Role;
 import com.selectron.library.repository.UserRepository;
+import com.selectron.library.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package com.selectron.library.controller;
 import javax.validation.Valid;
 
 import com.selectron.library.model.User;
-import com.selectron.library.service.UserService;
+import com.selectron.library.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CommentRepository extends JpaRepository<Comment,Integer> {
-    public List<Comment> findCommentsByBook(Book book);
-    public void deleteById(Integer id);
-    public void deleteAllByBook(Book book);
+public interface CommentRepository extends JpaRepository<Comment, Integer> {
+    List<Comment> findCommentsByBook(Book book);
+
+    void deleteById(Integer id);
+
+    void deleteAllByBook(Book book);
 }
