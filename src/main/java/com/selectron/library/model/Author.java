@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.Mapping;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.sql.Date;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public class Author {
     private String lastName;
     private Set<Book> books;
     private Date birthdayDate;
+    private URL image;
 
 
     @Id
@@ -60,5 +62,13 @@ public class Author {
 
     public void setBirthdayDate(Date birthdayDate) {
         this.birthdayDate = birthdayDate;
+    }
+
+    public URL getImage() {
+        return image;
+    }
+
+    public void setImage(URL image) {
+        this.image = image;
     }
 }
