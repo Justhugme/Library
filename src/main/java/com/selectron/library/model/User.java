@@ -22,7 +22,7 @@ public class User {
     @NotEmpty(message = "*Please provide an email")
     private String email;
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
+    @Length(min = 8, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
     @Transient
     private String password;
@@ -39,6 +39,11 @@ public class User {
     private Set<Role> roles;
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name= "whishlist", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> whishList;
+    @OneToMany(mappedBy = "user")
+    private Set<Rating> ratings;
 
     public int getId() {
         return id;
@@ -96,4 +101,27 @@ public class User {
         this.roles = roles;
     }
 
+    public Set<Book> getWhishList() {
+        return whishList;
+    }
+
+    public void setWhishList(Set<Book> whishList) {
+        this.whishList = whishList;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
 }

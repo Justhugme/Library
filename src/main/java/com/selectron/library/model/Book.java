@@ -20,6 +20,7 @@ public class Book {
     private URL icon;
     private URL url;
     private Set<Comment> comments;
+    private Set<Rating> ratings;
 
     public Book() {
     }
@@ -117,5 +118,14 @@ public class Book {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "book")
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 }
