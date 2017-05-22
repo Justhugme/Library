@@ -13,10 +13,10 @@
 <nav class="one">
     <ul>
         <li><a th:href="@{/user/home}">Home</a></li>
-        <li><a th:href="@{/User/BookList}">Books</a></li>
-        <li><a th:href="@{/User/Author}">Authors</a></li>
-        <li><a th:href="@{/User/WishList}">WishList</a></li>
-        <li><a th:href="@{/User/About}">About</a></li>
+        <li><a th:href="@{/user/books}">Books</a></li>
+        <li><a th:href="@{/user/authors}">Authors</a></li>
+        <li><a th:href="@{/user/WishList}">WishList</a></li>
+        <li><a th:href="@{/user/About}">About</a></li>
         <li><span th:text="${user.Name} + ' ' + ${user.lastName}"> </span> </li>
         <li><a class="Logout" th:href="@{/logout }">Logout</a></li></li>
     </ul>

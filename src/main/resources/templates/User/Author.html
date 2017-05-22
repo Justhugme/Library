@@ -2,17 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Author</title>
+    <title th:text="${user.Name }+ ' ' + ${user.lastName}"></title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/Author.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
-
-</div>
-
+<nav class="one">
+    <ul>
+        <li><a th:href="@{/user/home}">Home</a></li>
+        <li><a th:href="@{/user/books}">Books</a></li>
+        <li><a th:href="@{/user/authors}">Authors</a></li>
+        <li><a th:href="@{/user/WishList}">WishList</a></li>
+        <li><a th:href="@{/user/About}">About</a></li>
+        <li><span th:text="${user.Name} + ' ' + ${user.lastName}"> </span> </li>
+        <li><a class="Logout" th:href="@{/logout }">Logout</a></li></li>
+    </ul>
+</nav>
 </body>
 </html>

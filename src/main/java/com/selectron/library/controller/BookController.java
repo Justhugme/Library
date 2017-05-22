@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/user")
 public class BookController {
     @Autowired
     private BookService bookService;
@@ -31,7 +32,7 @@ public class BookController {
         modelAndView.addObject("user", user);
         modelAndView.addObject("searchParam", "");
         modelAndView.addObject("books", bookService.getAllBooks());
-        modelAndView.setViewName("b");
+        modelAndView.setViewName("User/BookList");
         return modelAndView;
     }
 
@@ -54,7 +55,7 @@ public class BookController {
         modelAndView.addObject("user", user);
         List<Book> wishList = new ArrayList<>(user.getWhishList());
         modelAndView.addObject("books", wishList);
-        modelAndView.setViewName("WishList");
+        modelAndView.setViewName("User/WishList");
         return modelAndView;
     }
 

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "user/")
 public class AuthorController {
     @Autowired
     private BookService bookService;
@@ -25,7 +26,7 @@ public class AuthorController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/all_author", method = RequestMethod.GET)
+    @RequestMapping(value = "/authors", method = RequestMethod.GET)
     public ModelAndView getAllAuthorsk() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -33,7 +34,7 @@ public class AuthorController {
         List<Author> authors = authorService.getAll();
         authors.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getLastName()));
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("Authors");
+        modelAndView.setViewName("User/Authors");
         return modelAndView;
     }
 
@@ -47,9 +48,18 @@ public class AuthorController {
         String wikiUrl = "en.wikipedia.org/wiki/" + author.getFirstName() + "_" + author.getLastName();
         modelAndView.addObject("wikiUrl", wikiUrl);
         modelAndView.addObject("author", author);
-        modelAndView.setViewName("Author");
+        modelAndView.setViewName("User/Author");
         return modelAndView;
     }
 
+    @RequestMapping(value = "/About", method = RequestMethod.GET)
+    public ModelAndView about() {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("User/About");
+        return modelAndView;
+    }
 
 }
