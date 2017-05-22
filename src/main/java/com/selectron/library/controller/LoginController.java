@@ -98,11 +98,15 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/user/ChangeHomePage", method = RequestMethod.POST)
-    public ModelAndView changedHomePage(@Valid User user) {
+    public ModelAndView changedHomePage(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        userService.saveUser(user);
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("User/ChangeHomePage");
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("User/ChangeHomePage");
+        } else {
+            userService.saveUser(user);
+            modelAndView.addObject("user", user);
+            modelAndView.setViewName("User/ChangeHomePage");
+        }
         return modelAndView;
     }
 
