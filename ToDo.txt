@@ -1,0 +1,17 @@
+Functional of our service:
+
+1) LogIn  +
+2) Registration +
+3) Show All Books  +-
+4) Search book by name  +-
+5) add book to wish list
+6) delete from wish list
+7) give feedback to a book
+8) add comment to a book
+9) delete comment
+10) Find book by author
+11) open authors page
+12) show author's wiki page
+13) open book page where are comments
+14) admin add book
+15) admin delete book
