@@ -1,6 +1,5 @@
 package com.selectron.library.controller;
 
-import com.selectron.library.model.User;
 import com.selectron.library.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

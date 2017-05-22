@@ -1,9 +1,13 @@
 package com.selectron.library.controller;
 
+import javax.servlet.ServletException;
 import javax.validation.Valid;
 
+import com.selectron.library.model.Rating;
 import com.selectron.library.model.User;
+import com.selectron.library.service.interfaces.RatingService;
 import com.selectron.library.service.interfaces.UserService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,11 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Controller
 public class LoginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RatingService ratingService;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
@@ -38,7 +47,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
@@ -51,10 +60,9 @@ public class LoginController {
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
-
+            modelAndView.setViewName("/login");
         }
+
         return modelAndView;
     }
 
@@ -63,7 +71,10 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        List<Rating> rate = ratingService.getRatingsWhereUser(user);
+        rate.sort((o1, o2) -> -(o1.getRating().compareTo(o2.getRating())));
         modelAndView.addObject("user", user);
+        modelAndView.addObject("rate", rate);
         modelAndView.setViewName("User/HomePage");
         return modelAndView;
     }
