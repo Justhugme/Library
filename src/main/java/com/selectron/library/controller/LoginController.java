@@ -1,24 +1,20 @@
 package com.selectron.library.controller;
 
-import javax.servlet.ServletException;
-import javax.validation.Valid;
-
 import com.selectron.library.model.Rating;
 import com.selectron.library.model.User;
 import com.selectron.library.service.interfaces.RatingService;
 import com.selectron.library.service.interfaces.UserService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Comparator;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,7 +43,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
@@ -71,7 +67,8 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        List<Rating> rate = ratingService.getRatingsWhereUser(user);
+//        List<Rating> rate = ratingService.getRatingsWhereUser(user);
+        List<Rating> rate = new ArrayList<>(user.getRatings());
         rate.sort((o1, o2) -> -(o1.getRating().compareTo(o2.getRating())));
         modelAndView.addObject("user", user);
         modelAndView.addObject("rate", rate);
