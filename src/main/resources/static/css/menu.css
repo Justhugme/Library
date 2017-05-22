@@ -24,16 +24,13 @@ nav {
     background: #515151;
 }
 .one a {
-    padding: 1em;
-    padding-right: 100px;
+    padding: 1em 100px 1em 1em;
     color: rgb(250,250,250);
 }
 .one span {
     font-size: 75%;
-    padding: 1em;
     margin-LEFT: 250px;
-
-    padding-right: 20px;
+    padding: 1em 20px 1em 1em;
     color: rgb(250,250,250);
 }
 .one .Logout{
