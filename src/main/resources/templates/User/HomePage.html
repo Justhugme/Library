@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="top-menu">
-    <ul  class="menu-main">
+    <ul class="menu-main">
         <li><a th:href="@{/user/home}">Home</a></li>
         <li><a th:href="@{/user/books}">Books</a></li>
         <li><a th:href="@{/user/authors}">Authors</a></li>
@@ -38,8 +38,8 @@
                 <div>
                     <p><b>Your email:</b> <span th:text="*{email}"></span></p>
                 </div>
+                <input type="button" value="Change" class="btn"/>
             </form>
-            <input type="button" value="Change" class="btn" th:action = />
         </div>
     </div>
 </div>

@@ -45,10 +45,8 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
-
-    @Override
-    public void autologin(User user, HttpServletRequest request) throws ServletException {
-        request.login(user.getEmail(), user.getPassword());
+    public void updateUser(User user){
+        userRepository.save(user);
     }
 
 }

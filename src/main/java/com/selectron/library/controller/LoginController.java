@@ -87,5 +87,23 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/user/ChangeHomePage", method = RequestMethod.GET)
+    public ModelAndView changeHomePage() {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("User/ChangeHomePage");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/ChangeHomePage", method = RequestMethod.POST)
+    public ModelAndView changedHomePage(@Valid User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        userService.saveUser(user);
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("User/ChangeHomePage");
+        return modelAndView;
+    }
 
 }
