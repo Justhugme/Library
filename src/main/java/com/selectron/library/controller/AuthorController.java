@@ -2,7 +2,7 @@ package com.selectron.library.controller;
 
 import com.selectron.library.model.Author;
 import com.selectron.library.model.User;
-import com.selectron.library.repository.AuthorRepository;
+import com.selectron.library.service.interfaces.AuthorService;
 import com.selectron.library.service.interfaces.BookService;
 import com.selectron.library.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,32 +21,32 @@ public class AuthorController {
     @Autowired
     private BookService bookService;
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
     @Autowired
     private UserService userService;
 
-    @RequestMapping(name = "/authors", method = RequestMethod.GET)
-    public ModelAndView getAllAuthors() {
+    @RequestMapping(value = "/all_author", method = RequestMethod.GET)
+    public ModelAndView getAllAuthorsk() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorService.getAll();
         authors.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getLastName()));
         modelAndView.addObject("user", user);
         modelAndView.setViewName("Authors");
         return modelAndView;
     }
 
-    @RequestMapping(name = "/author/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/author/{id}", method = RequestMethod.GET)
     public ModelAndView getAuthorById(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("user",user);
-        Author author = authorRepository.findOne(id);
+        modelAndView.addObject("user", user);
+        Author author = authorService.findAuthorById(id);
         String wikiUrl = "en.wikipedia.org/wiki/" + author.getFirstName() + "_" + author.getLastName();
-        modelAndView.addObject("wikiUrl",wikiUrl);
-        modelAndView.addObject("author",author);
+        modelAndView.addObject("wikiUrl", wikiUrl);
+        modelAndView.addObject("author", author);
         modelAndView.setViewName("Author");
         return modelAndView;
     }

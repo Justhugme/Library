@@ -22,7 +22,7 @@ public class User {
     @NotEmpty(message = "*Please provide an email")
     private String email;
     @Column(name = "password")
-    @Length(min = 8, message = "*Your password must have at least 5 characters")
+    @Length(min = 8, message = "*Your password must have at least 8 characters")
     @NotEmpty(message = "*Please provide your password")
     @Transient
     private String password;
