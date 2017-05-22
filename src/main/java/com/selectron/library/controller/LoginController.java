@@ -42,25 +42,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
-        }
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
-        } else {
-            userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.setViewName("/login");
-        }
-
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/user/home", method = RequestMethod.GET)
     public ModelAndView homeUser() {
@@ -93,6 +74,7 @@ public class LoginController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("user", user);
+        System.out.printf("Get method heere");
         modelAndView.setViewName("User/ChangeHomePage");
         return modelAndView;
     }
@@ -103,11 +85,36 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("User/ChangeHomePage");
         } else {
-            userService.saveUser(user);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user2 = userService.findUserByEmail(auth.getName());
+            user2.setName(user.getName());
+            user2.setLastName(user.getLastName());
+            user2.setPassword(user.getPassword());
+            user2.setEmail(user.getEmail());
+            userService.saveUser(user2);
             modelAndView.addObject("user", user);
-            modelAndView.setViewName("User/ChangeHomePage");
+            modelAndView.setViewName("User/HomePage");
         }
         return modelAndView;
     }
 
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        User userExists = userService.findUserByEmail(user.getEmail());
+        if (userExists != null) {
+            bindingResult
+                    .rejectValue("email", "error.user",
+                            "There is already a user registered with the email provided");
+        }
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("registration");
+        } else {
+            userService.saveUser(user);
+            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.setViewName("/login");
+        }
+
+        return modelAndView;
+    }
 }
