@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="top-menu">
-    <ul class="menu-main">
+    <ul  class="menu-main">
         <li><a th:href="@{/user/home}">Home</a></li>
         <li><a th:href="@{/user/books}">Books</a></li>
         <li><a th:href="@{/user/authors}">Authors</a></li>
@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form th:object="${user}" th:action="@{/user/ChangeHomePage}" method="get">
+            <form th:object="${user}">
                 <h2>Home page</h2>
                 <div>
                     <p><b>Your name:</b> <span th:text="*{Name}"></span></p>
@@ -38,7 +38,9 @@
                 <div>
                     <p><b>Your email:</b> <span th:text="*{email}"></span></p>
                 </div>
-                <input type="button" value="Change" class="btn"/>
+            </form>
+            <form th:action="@{/user/ChangeHomePage}" method="get">
+                <button class="btn" type="Submit">Change</button>
             </form>
         </div>
     </div>
