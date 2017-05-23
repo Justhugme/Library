@@ -15,7 +15,7 @@ public class Book {
     private String publisher;
     private Integer yearOfPublishing;
     private String genre;
-    private Double isbn;
+    private String isbn;
     private String description;
     private URL icon;
     private URL url;
@@ -79,11 +79,11 @@ public class Book {
         this.genre = genre;
     }
 
-    public Double getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Double isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
