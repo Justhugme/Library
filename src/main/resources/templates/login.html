@@ -14,28 +14,27 @@
 <body>
 <nav class="top-menu">
 	<ul  class="menu-main">
-		<li><a th:href="@{/user/home}">Home</a></li>
-		<li><a th:href="@{/user/books}">Books</a></li>
-		<li><a th:href="@{/user/authors}">Authors</a></li>
-		<li><a th:href="@{/user/WishList}">WishList</a></li>
-		<li><a th:href="@{/user/About}">About</a></li>
+		<li><a th:href="@{/login}">Home</a></li>
+		<li><a th:href="@{/login}">Books</a></li>
+		<li><a th:href="@{/login}">Authors</a></li>
+		<li><a th:href="@{/About}">About</a></li>
 		<li><a class="Login" th:href="@{/registration}">Registration</a></li>
 		</li>
 	</ul>
 </nav>
 
-	
+
 	<div class="container">
 		<img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
 		<form th:action="@{/login}" method="POST" class="form-signin">
 			<h3 class="form-signin-heading" th:text="Welcome"></h3>
 			<br/>
-			 
+
 			<input type="text" id="email" name="email"  th:placeholder="Email"
 				class="form-control" /> <br/>
 			<input type="password"  th:placeholder="Password"
-				id="password" name="password" class="form-control" /> <br /> 
-				
+				id="password" name="password" class="form-control" /> <br />
+
 			<div align="center" th:if="${param.error}">
 				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
 			</div>
@@ -43,8 +42,9 @@
 			<a th:href="@{/registration}">Create new account</a>
 		</form>
 	</div>
-	<div>
-
-	</div>
+<div id="footer">
+    <div class="rights">2017 © All rights reserved</div>
+    <div class="admin">Admin: +380-98-221-2492</div>
+</div>
 </body>
 </html>
