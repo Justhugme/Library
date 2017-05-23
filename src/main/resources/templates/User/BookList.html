@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title th:text="${user.Name }+ ' ' + ${user.lastName}"></title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/BookList.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,7 +12,7 @@
 </head>
 <body>
 <nav class="top-menu">
-    <ul  class="menu-main">
+    <ul class="menu-main">
         <li><a th:href="@{/user/home}">Home</a></li>
         <li><a th:href="@{/user/books}">Books</a></li>
         <li><a th:href="@{/user/authors}">Authors</a></li>
@@ -23,6 +24,27 @@
 </nav>
 <div>
 
+    <form th:action="@{/user/books/search=}" th:object="${search}" method="post">
+        <input type="text" id="role" name="role" class="form-control" th:placeholder="Search"/>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" th:text="Search">Search</button>
+    </form>
+
+    <table>
+        <tr>
+            <th ></th>
+            <th>NAME</th>
+            <th>year</th>
+            <th>Authors</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td><a th:href="@{'book/id='+${book.id}}"><img th:attr="src=${book.icon}"  class = "Photo"/></a></td>
+            <td th:text="${book.name}">name</td>
+            <!--<td th:text="${book.isbn}">isbn</td>-->
+            <td th:text="${book.yearOfPublishing}">year of publishing</td>
+            <td/><div th:each="author : ${book.authors}" th:text="${author.firstName}+', '+${author.lastName}"></div> </td>
+        </tr>
+
+    </table>
 </div>
 <div id="footer">
     <div class="rights">2017 © All rights reserved</div>

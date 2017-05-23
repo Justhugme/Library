@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "user/")
+@RequestMapping(value = "/user")
 public class AuthorController {
     @Autowired
     private BookService bookService;
@@ -34,6 +34,7 @@ public class AuthorController {
         List<Author> authors = authorService.getAll();
         authors.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getLastName()));
         modelAndView.addObject("user", user);
+        modelAndView.addObject("authors", authors);
         modelAndView.setViewName("User/Authors");
         return modelAndView;
     }
@@ -45,7 +46,7 @@ public class AuthorController {
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("user", user);
         Author author = authorService.findAuthorById(id);
-        String wikiUrl = "en.wikipedia.org/wiki/" + author.getFirstName() + "_" + author.getLastName();
+        String wikiUrl = "https://en.wikipedia.org/wiki/" + author.getFirstName().trim() + "_" + author.getLastName().trim();
         modelAndView.addObject("wikiUrl", wikiUrl);
         modelAndView.addObject("author", author);
         modelAndView.setViewName("User/Author");

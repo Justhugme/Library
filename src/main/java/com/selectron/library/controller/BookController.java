@@ -1,6 +1,7 @@
 package com.selectron.library.controller;
 
 import com.selectron.library.model.Book;
+import com.selectron.library.model.Role;
 import com.selectron.library.model.User;
 import com.selectron.library.service.interfaces.BookService;
 import com.selectron.library.service.interfaces.UserService;
@@ -8,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -30,20 +33,24 @@ public class BookController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("user", user);
-        modelAndView.addObject("searchParam", "");
+        modelAndView.addObject("search", new Role());
         modelAndView.addObject("books", bookService.getAllBooks());
         modelAndView.setViewName("User/BookList");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/book/{searchParam}", method = RequestMethod.GET)
-    public ModelAndView getBooksByName(@PathVariable String searchParam) {
+    @RequestMapping(value = "/books/search=", method = RequestMethod.POST)
+    public ModelAndView getBooksByName(@ModelAttribute(name = "search") Role searchParam) {
         ModelAndView modelAndView = new ModelAndView();
+        System.out.println("____________________------------------ " + searchParam.getRole());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        List<Book> books = bookService.findBooksByName(searchParam.getRole().trim());
+        books.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
         modelAndView.addObject("user", user);
-        modelAndView.addObject("books", bookService.findBooksByName(searchParam));
-        modelAndView.setViewName("a");
+        modelAndView.addObject("search", searchParam);
+        modelAndView.addObject("books", books);
+        modelAndView.setViewName("User/BookList");
         return modelAndView;
     }
 
@@ -60,14 +67,15 @@ public class BookController {
     }
 
 
-    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/book/id={id}", method = RequestMethod.GET)
     public ModelAndView getBookPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        Book book = bookService.findBookById(id);
         modelAndView.addObject("user", user);
-        modelAndView.addObject("book", bookService.findBookById(id));
-        modelAndView.setViewName("BookInfo");
+        modelAndView.addObject("book", book);
+        modelAndView.setViewName("User/BookInfo");
         return modelAndView;
     }
 

@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="top-menu">
-    <ul  class="menu-main">
+    <ul class="menu-main">
         <li><a th:href="@{/user/home}">Home</a></li>
         <li><a th:href="@{/user/books}">Books</a></li>
         <li><a th:href="@{/user/authors}">Authors</a></li>
@@ -22,7 +22,19 @@
     </ul>
 </nav>
 <div>
+    <table>
+        <tr>
+            <th>hey</th>
+            <th> ho</th>
+            <th>wtf</th>
+        </tr>
+        <tr th:each="author : ${authors}">
+            <td th:text="${author.firstName}"></td>
+            <td th:text="${author.lastName}"/>
+            <td> <a th:href="@{'author/'+${author.id}}">author ref</a></td>
+        </tr>
 
+    </table>
 </div>
 <div id="footer">
     <div class="rights">2017 © All rights reserved</div>

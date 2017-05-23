@@ -82,11 +82,18 @@ public class LoginController {
     @RequestMapping(value = "/user/ChangeHomePage", method = RequestMethod.POST)
     public ModelAndView changedHomePage(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        User userExists = userService.findUserByEmail(user.getEmail());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user2 = userService.findUserByEmail(auth.getName());
+        if (userExists.getId() != user2.getId()) {
+            bindingResult
+                    .rejectValue("email", "error.user",
+                            "There is already a user registered with the email provided");
+        }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("User/ChangeHomePage");
         } else {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user2 = userService.findUserByEmail(auth.getName());
+
             user2.setName(user.getName());
             user2.setLastName(user.getLastName());
             user2.setPassword(user.getPassword());

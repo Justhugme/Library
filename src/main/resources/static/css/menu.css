@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Lora);
 body {margin:0;}
+.container{
+    height: 700px;
+}
 h2 {
     font-family: monospace;
     color: #606060;
