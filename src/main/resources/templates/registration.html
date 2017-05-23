@@ -12,11 +12,10 @@
 <body>
 <nav class="top-menu">
 	<ul  class="menu-main">
-		<li><a th:href="@{/user/home}">Home</a></li>
-		<li><a th:href="@{/user/books}">Books</a></li>
-		<li><a th:href="@{/user/authors}">Authors</a></li>
-		<li><a th:href="@{/user/WishList}">WishList</a></li>
-		<li><a th:href="@{/user/About}">About</a></li>
+		<li><a th:href="@{/login}">Home</a></li>
+		<li><a th:href="@{/login}">Books</a></li>
+		<li><a th:href="@{/login}">Authors</a></li>
+		<li><a th:href="@{/About}">About</a></li>
 		<li><a class="Login" th:href="@{/Login}">Login</a></li>
 		</li>
 	</ul>
@@ -67,7 +66,7 @@
 							<button type="submit" class="btn btn-primary btn-block">Register User</button>
 						</div>
 					</div>
-					<a th:href="@{/registration}">Create new accaunt</a>
+					<a th:href="@{/login}">Have account?</a>
 					<span th:utext="${successMessage}"></span>
 				</form>
 			</div>
