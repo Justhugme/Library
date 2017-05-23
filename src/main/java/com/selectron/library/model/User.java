@@ -17,7 +17,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
-    @Column(name = "email")
+    @Column(name = "email",unique=true)
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
@@ -89,9 +89,7 @@ public class User {
         return active;
     }
 
-    public void setActive(int active) {
-        this.active = active;
-    }
+    public void setActive(int active) {this.active = active; }
 
     public Set<Role> getRoles() {
         return roles;
