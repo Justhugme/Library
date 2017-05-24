@@ -43,7 +43,6 @@
             </div>
         </div>
     </form>
-<hr>
 
 <div class="col-md-12">
     <form autocomplete="off" action="#" th:action="@{'/user/book/id='+${book.id}+'/addComment'}"
@@ -65,9 +64,21 @@
         </div>
     </form>
 </div>
-    <hr>
 <div>
     <h2>Other comments:</h2>
+    <div class="col-md-9">
+        <table>
+            <tr th:each="comment : ${book.comments}">
+                <td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}"></td>
+                <td th:text="'('+${comment.date} + '): '"></td>
+                <td th:text="${comment.content}" ></td>
+            </tr>
+        </table>
+        <div >
+            <p></p>
+            <p><span th:text="*{description}"></p></div>
+        <div>
+    </div>
 </div>
 
 </div>

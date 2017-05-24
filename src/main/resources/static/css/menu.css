@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lora);
 body {margin:0;}
 .container{
-    min-height: 550px;
+    min-height: 100vh;
 }
 h2 {
     font-family: monospace;
