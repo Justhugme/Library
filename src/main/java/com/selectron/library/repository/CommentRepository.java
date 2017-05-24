@@ -12,4 +12,5 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     void deleteById(Integer id);
 
     void deleteAllByBook(Book book);
+
 }

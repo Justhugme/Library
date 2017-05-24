@@ -5,6 +5,7 @@ import com.selectron.library.model.Comment;
 import com.selectron.library.model.Role;
 import com.selectron.library.model.User;
 import com.selectron.library.service.interfaces.BookService;
+import com.selectron.library.service.interfaces.CommentService;
 import com.selectron.library.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -25,6 +27,8 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView getAllBooks() {
@@ -102,33 +106,43 @@ public class BookController {
 
     @RequestMapping(value = "/book/id={id}", method = RequestMethod.GET)
     public ModelAndView getBookPage(@PathVariable Integer id) {
+        Comment newComment = new Comment();
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         Book book = bookService.findBookById(id);
         modelAndView.addObject("user", user);
-        modelAndView.addObject("newComment",new Comment());
+        modelAndView.addObject("newComment", newComment);
+
         modelAndView.addObject("book", book);
         modelAndView.setViewName("User/BookInfo");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/book/id={id}/addComment",method = RequestMethod.POST)
-    public ModelAndView addComment(@PathVariable Integer id,Comment comment) {
+    @RequestMapping(value = "/book/id={id}/addComment", method = RequestMethod.POST)
+    public ModelAndView addComment(@PathVariable Integer id, Comment comment) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         Book book = bookService.findBookById(id);
+        Comment newComment = new Comment();
         comment.setUser(user);
         comment.setBook(book);
         Date date = new Date(Calendar.getInstance().getTime().getTime());
         comment.setDate(date);
+        comment.setId(commentService.getIdForComment(comment));
+        commentService.saveComment(comment);
+        System.out.println("---------------------INFO-------------");
+        System.out.println("id book = " + comment.getBook().getId());
+        System.out.println("comment content = " + comment.getContent());
+        System.out.println("comment id = " + comment.getId());
+        System.out.println("user id = " + comment.getUser().getId());
+        System.out.println("date = " + comment.getDate());
+        System.out.println("---------------------INFO-------------");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("newComment",new Comment());
+        modelAndView.addObject("newComment", newComment);
         modelAndView.addObject("book", book);
         modelAndView.setViewName("User/BookInfo");
         return modelAndView;
     }
-
-
 }

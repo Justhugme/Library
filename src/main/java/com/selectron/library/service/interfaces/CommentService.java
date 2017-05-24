@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface CommentService {
     List<Comment> getAllCommentsByBook(Book book);
-    void deleteComentById(Integer id);
-    void addComentToBook(Book book);
-    void deleteAllcomentsByBook(Book book);
+    void saveComment(Comment comment);
+    int getIdForComment(Comment comment);
 
 }

@@ -47,7 +47,7 @@ public class Comment {
         this.date = date;
     }
 
-    @JsonIgnore
+
     @ManyToOne()
     @JoinColumn(name = "user_id")
     public User getUser() {
@@ -58,7 +58,6 @@ public class Comment {
         this.user = user;
     }
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "book_id")
     public Book getBook() {

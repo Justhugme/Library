@@ -46,7 +46,7 @@
 <hr>
 
 <div class="col-md-12">
-    <form autocomplete="off" action="#" th:action="@{/user/BookInfo}"
+    <form autocomplete="off" action="#" th:action="@{'/user/book/id='+${book.id}+'/addComment'}"
           th:object="${newComment}" method="post" class="form-horizontal"
           role="form">
         <div class="form-group">
