@@ -1,6 +1,7 @@
 package com.selectron.library.controller;
 
 import com.selectron.library.model.Book;
+import com.selectron.library.model.Comment;
 import com.selectron.library.model.Role;
 import com.selectron.library.model.User;
 import com.selectron.library.service.interfaces.BookService;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -106,6 +107,24 @@ public class BookController {
         User user = userService.findUserByEmail(auth.getName());
         Book book = bookService.findBookById(id);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("newComment",new Comment());
+        modelAndView.addObject("book", book);
+        modelAndView.setViewName("User/BookInfo");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/book/id={id}/addComment",method = RequestMethod.POST)
+    public ModelAndView addComment(@PathVariable Integer id,Comment comment) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        Book book = bookService.findBookById(id);
+        comment.setUser(user);
+        comment.setBook(book);
+        Date date = new Date(Calendar.getInstance().getTime().getTime());
+        comment.setDate(date);
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("newComment",new Comment());
         modelAndView.addObject("book", book);
         modelAndView.setViewName("User/BookInfo");
         return modelAndView;
