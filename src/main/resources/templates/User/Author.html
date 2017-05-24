@@ -4,6 +4,7 @@
 <head>
     <title th:text="${user.Name }+ ' ' + ${user.lastName}"></title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Author1.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -21,21 +22,47 @@
         </li>
     </ul>
 </nav>
-<div>
+<div class="container">
 
-    <table>
-        <tr>
-            <th>hey</th>
-            <th> ho</th>
-            <th>wtf</th>
-        </tr>
-        <td th:text="${author.firstName}"></td>
-        <td th:text="${author.lastName}"/>
-        <td> <a target="_blank" th:href="@{${wikiUrl}}" >wikiUrl</a></td>
-        </tr>
+    <div class="container">
+        <form th:object="${author}">
+            <div class="col-md-3 "><img  th:attr="src=${author.image}"/></div>
+            <div class="col-md-offest-9 right">
+                <div>
+                    <p><b>Name: </b> <span th:text="*{firstName} + ' ' + *{lastName}"></span></p>
+                </div>
+                <div>
+                    <p><b>Date of birth: </b> <span th:text="*{birthdayDate}"></span></p>
+                </div>
+                <!--<div>-->
+                    <!--<p><b>Books:</b><span th:each="book : ${author.books}"-->
+                                                  <!--th:text="${book.Name}" th:href="@{'book/id='+${book.id}}"></span></p>-->
+                <!--</div>-->
+                <div> <a target="_blank" th:href="@{${wikiUrl}}" >Detail information</a></div>
+                <div>
+                    <p><b>Date of birth: </b> <span th:text="*{birthdayDate}"></span></p>
+                </div>
+            </div>
+        </form>
 
-    </table>
+        <div class="books col-md-12">
+            <h2>Available books:</h2>
+        <table>
+            <tr>
+                <th ></th>
+                <th>NAME</th>
+                <th>year</th>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td><a th:href="@{'/user/book/id='+${book.id}}"><img th:attr="src=${book.icon}"  class = "Photo"  width=52px; height=52px;/></a></td>
+                <td th:text="${book.name}">name</td>
+                <!--<td th:text="${book.isbn}">isbn</td>-->
+                <td th:text="${book.yearOfPublishing}">year of publishing</td>
+            </tr>
 
+        </table>
+        </div>
+    </div>
 </div>
 <div id="footer" class="row">
     <div class="col-xs-1 col-sm-1 col-md-1"></div>

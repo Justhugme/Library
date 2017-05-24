@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lora);
 body {margin:0;}
 .container{
-    height: 700px;
+    min-height: 550px;
 }
 h2 {
     font-family: monospace;
@@ -19,12 +19,12 @@ a {
 
 nav {
     display: block;
-    width: auto;
-    margin: 0 auto 30px;
+
+    margin: 0 auto 0px;
 }
 
 .top-menu {
-
+    width: 100%;
     position: relative;
     background: #515151;
     box-shadow: inset 0 0 10px #ccc;
@@ -46,7 +46,7 @@ nav {
 }
 .menu-main {
     list-style: none;
-    padding: 0 30px;
+    padding: 0 0px;
     margin: 0;
     font-size: 18px;
     text-align: center;
@@ -74,7 +74,6 @@ nav {
     font-family: 'PT Sans', sans-serif;
     font-size: 16px;
     color: rgb(225,225,225);
-    //border-bottom: 1px solid transparent;
     transition: .3s linear;
 }
 .menu-main .current, .menu-main a:hover {
@@ -95,21 +94,12 @@ nav {
 
 
 #footer {
-    display: inline-block;
+    width: 101%;
     margin-top: 20px;
-    bottom: 0;
     background: rgb(81, 81, 81);
-    width:100%;
     height: 80px;
     color: rgb(204, 204, 204);
-    text-align: center;
-    align-content: center;
-    text-align: center;
-    flex: 0 0 auto;
-}
 
-.foot{
-    align-content: center;
 }
 
 .rights {
@@ -126,9 +116,9 @@ nav {
 }
 
 .admin {
-
+    margin-right: 0px;
     /*float: left;*/
-    padding-right: 80px;
+    padding-right: 0px;
     font-size: 15px;
     /*margin-left: 850px;*/
     text-align: right;

@@ -22,7 +22,7 @@
         </li>
     </ul>
 </nav>
-<div>
+<div class="container">
     <form th:object="${book}">
         <div class="col-md-3 "><img  th:attr="src=${book.icon}" class="Photo"/></div>
         <div class="col-md-offest-9 right">
@@ -33,9 +33,11 @@
                 <p><b>Year of publishing: </b> <span th:text="*{yearOfPublishing}"></span></p>
             </div>
             <div>
-                <p><b>Authors:</b> <span th:each="author : ${book.authors}"
-                                         th:text="${author.firstName}+' '+${author.lastName}"></span></p>
+                <p><b>Authors:</b> <a th:each="author:${book.authors}"  th:href="@{'/user/author/'+${author.id}}"> <span
+                                      th:text="${author.firstName}+' '+${author.lastName}"> </a></span></p>
             </div>
+            <div><p><b>Description:</b></p>
+                <p><span th:text="*{description}"></p></div>
             <div>
                 <a th:href="*{url}">Download</a>
             </div>

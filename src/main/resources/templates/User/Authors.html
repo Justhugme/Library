@@ -4,6 +4,7 @@
 <head>
     <title th:text="${user.Name }+ ' ' + ${user.lastName}"></title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Author.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -21,17 +22,17 @@
         </li>
     </ul>
 </nav>
-<div>
+<div class="container">
     <table>
         <tr>
-            <th>hey</th>
-            <th> ho</th>
-            <th>wtf</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Information</th>
         </tr>
         <tr th:each="author : ${authors}">
             <td th:text="${author.firstName}"></td>
             <td th:text="${author.lastName}"/>
-            <td> <a th:href="@{'author/'+${author.id}}">author ref</a></td>
+            <td> <a th:href="@{'author/'+${author.id}}">get information</a></td>
         </tr>
 
     </table>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -63,9 +64,11 @@ public class AuthorController {
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("user", user);
         Author author = authorService.findAuthorById(id);
+        List<Book> books = new ArrayList<>(author.getBooks());
         String wikiUrl = "https://en.wikipedia.org/wiki/" + author.getFirstName().trim() + "_" + author.getLastName().trim();
         modelAndView.addObject("wikiUrl", wikiUrl);
         modelAndView.addObject("author", author);
+        modelAndView.addObject("books", books);
         modelAndView.setViewName("User/Author");
         return modelAndView;
     }
