@@ -4,6 +4,7 @@
 <head>
     <title th:text="${user.Name }+ ' ' + ${user.lastName}"></title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/BookList.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -22,7 +23,30 @@
     </ul>
 </nav>
 <div class="container">
+    <table>
+        <tr>
+            <th></th>
+            <th>NAME</th>
+            <th>year</th>
+            <th>Authors</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td><a th:href="@{'book/id='+${book.id}}"><img th:attr="src=${book.icon}" class="Photo"/></a></td>
+            <td th:text="${book.name}">name</td>
+            <!--<td th:text="${book.isbn}">isbn</td>-->
+            <td th:text="${book.yearOfPublishing}">year of publishing</td>
+            <td/>
+            <div th:each="author : ${book.authors}" th:text="${author.firstName}+' '+${author.lastName}"></div>
+            </td>
+            <td>
+                <form  th:action="@{/user/WishList/remove(BookId=${book.id})}" method="post">
+                    <button class="btn" type="Submit">Remove</button>
+                </form>
+            </td>
 
+        </tr>
+
+    </table>
 </div>
 <div id="footer" class="row">
     <div class="col-xs-1 col-sm-1 col-md-1"></div>
