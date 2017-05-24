@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -59,6 +60,38 @@ public class BookController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("user", user);
+        List<Book> wishList = new ArrayList<>(user.getWhishList());
+        modelAndView.addObject("books", wishList);
+        modelAndView.setViewName("User/WishList");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/WishList/add", method = RequestMethod.POST)
+    public ModelAndView addBookToWishList(@ModelAttribute(name = "book") Book book) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        Set<Book> wishlist = user.getWhishList();
+        wishlist.add(book);
+        user.setWhishList(wishlist);
+        userService.saveUser(user);
+        modelAndView.setViewName("User/BookList");
+        modelAndView.addObject("search", new Role());
+        modelAndView.addObject("books", bookService.getAllBooks());
+        modelAndView.addObject("user",user);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/WishList/remove", method = RequestMethod.POST)
+    public ModelAndView removeBookFromWishList(@ModelAttribute(name = "book") Book book) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        Set<Book> wishlist = user.getWhishList();
+        wishlist.remove(book);
+        user.setWhishList(wishlist);
+        userService.saveUser(user);
         modelAndView.addObject("user", user);
         List<Book> wishList = new ArrayList<>(user.getWhishList());
         modelAndView.addObject("books", wishList);
