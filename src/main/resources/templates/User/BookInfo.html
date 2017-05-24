@@ -44,43 +44,44 @@
         </div>
     </form>
 
-<div class="col-md-12">
-    <form autocomplete="off" action="#" th:action="@{'/user/book/id='+${book.id}+'/addComment'}"
-          th:object="${newComment}" method="post" class="form-horizontal"
-          role="form">
-        <div class="form-group">
-            <div class="col-sm-9">
-                <div class="form-group">
-                    <label for="comment">Your comment:</label>
-                    <textarea class="form-control" rows="5" id="comment" type="text" th:field="*{content}"
-                              placeholder="Write here"></textarea>
-                </div>
-            </div>
+    <div class="col-md-12">
+        <form autocomplete="off" action="#" th:action="@{'/user/book/id='+${book.id}+'/addComment'}"
+              th:object="${newComment}" method="post" class="form-horizontal"
+              role="form">
             <div class="form-group">
                 <div class="col-sm-9">
-                    <button type="submit" class="btn btn-primary btn-block">Send comment</button>
+                    <div class="form-group">
+                        <label for="comment">Your comment:</label>
+                        <textarea class="form-control" rows="5" id="comment" type="text" th:field="*{content}"
+                                  placeholder="Write here"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-primary btn-block">Send comment</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
-<div>
-    <h2>Other comments:</h2>
-    <div class="col-md-9">
-        <table>
-            <tr th:each="comment : ${book.comments}">
-                <td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}"></td>
-                <td th:text="'('+${comment.date} + '): '"></td>
-                <td th:text="${comment.content}" ></td>
-            </tr>
-        </table>
-        <div >
-            <p></p>
-            <p><span th:text="*{description}"></p></div>
-        <div>
+        </form>
     </div>
-</div>
+    <div>
+        <h2>Other comments:</h2>
+        <div class="col-md-9">
+            <table>
+                <tr th:each="comment : ${book.comments}">
+                    <td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}"></td>
+                    <td th:text="'('+${comment.date} + '): '"></td>
+                    <td th:text="${comment.content}"></td>
+                </tr>
+            </table>
+            <div>
+                <p></p>
+                <p><span th:text="*{description}"></p></div>
+            <div>
+            </div>
+        </div>
 
+    </div>
 </div>
 <div id="footer" class="row">
     <div class="col-xs-1 col-sm-1 col-md-1"></div>
@@ -88,5 +89,6 @@
     <div class="col-xs-11 col-sm-5 col-md-6 admin">Admin: +380-98-221-2492</div>
     <div class="col-xs-1 col-sm-1 col-md-1"></div>
 </div>
+<p></p>
 </body>
 </html>

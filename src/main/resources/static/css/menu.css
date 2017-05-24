@@ -1,11 +1,47 @@
 @import url(https://fonts.googleapis.com/css?family=Lora);
 
 body {
+    height:100%;
     margin: 0;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body
+{
+    height: 100%;
+}
+.content {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding-bottom: 90px;
+}
+.footer1 {
+    height: 80px;
+    margin-top: -80px;
+}
+
 .container {
-    min-height: 100vh;
+    /*padding: 80px;*/
+    /*min-height: 100%;*/
+    /*height: auto !important;*/
+    box-sizing: border-box;
+    min-height: 100%;
+    padding-bottom: 90px;
+}
+
+#footer {
+    height: 80px;
+    margin-top: -80px;
+    width: 101%;
+    /*margin-top: -80px;*/
+    /*height: 80px;*/
+    background: rgb(81, 81, 81);
+    color: rgb(204, 204, 204);
+    /*height:20%;*/
 }
 
 h2 {
@@ -110,15 +146,6 @@ nav {
     }
 }
 
-#footer {
-
-    width: 101%;
-    margin-top: -80px;
-    background: rgb(81, 81, 81);
-    height: 80px;
-    color: rgb(204, 204, 204);
-
-}
 
 .rights {
     /*float: left;*/
