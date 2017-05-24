@@ -70,14 +70,5 @@ public class AuthorController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/About", method = RequestMethod.GET)
-    public ModelAndView about() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("User/About");
-        return modelAndView;
-    }
 
 }
