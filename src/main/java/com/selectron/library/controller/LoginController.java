@@ -124,4 +124,21 @@ public class LoginController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "/user/About", method = RequestMethod.GET)
+    public ModelAndView userAbout() {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("/User/About");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/About", method = RequestMethod.GET)
+    public ModelAndView about() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/About");
+        return modelAndView;
+    }
 }
