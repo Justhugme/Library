@@ -22,4 +22,16 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findAuthorById(Integer id) {
         return authorRepository.getOne(id);
     }
+
+    @Override
+    public List<Author> findAuthorsByName(String name) {
+        List<Author> authors;
+        if (name.trim().length() > 5)
+            authors = authorRepository.findAuthorsByFirstNameContainsOrLastNameContains(name.trim(),name.trim());
+        else {
+            authors = authorRepository.findAuthorsByFirstNameStartsWith(name.trim());
+            authors.addAll(authorRepository.findAuthorsByLastNameStartsWith(name.trim()));
+        }
+        return authors;
+    }
 }

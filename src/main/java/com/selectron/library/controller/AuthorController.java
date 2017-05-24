@@ -1,6 +1,8 @@
 package com.selectron.library.controller;
 
 import com.selectron.library.model.Author;
+import com.selectron.library.model.Book;
+import com.selectron.library.model.Role;
 import com.selectron.library.model.User;
 import com.selectron.library.service.interfaces.AuthorService;
 import com.selectron.library.service.interfaces.BookService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,6 +39,20 @@ public class AuthorController {
         modelAndView.addObject("user", user);
         modelAndView.addObject("authors", authors);
         modelAndView.setViewName("User/Authors");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/authors/search=", method = RequestMethod.POST)
+    public ModelAndView getAuthorsByName(@ModelAttribute(name = "search") Role searchParam) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        List<Author> authors = authorService.findAuthorsByName(searchParam.getRole().trim());
+        authors.sort((o1, o2) -> o1.getFirstName().compareToIgnoreCase(o2.getFirstName()));
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("search", searchParam);
+        modelAndView.addObject("authors", authors);
+        modelAndView.setViewName("User/BookList");
         return modelAndView;
     }
 
