@@ -25,8 +25,8 @@
 <div class="container">
 
     <form th:action="@{/user/books/search=}" th:object="${search}" method="post">
-        <input type="text" id="role" name="role" class="form-control" th:placeholder="Search"/>
-        <button type="submit" class="btn btn-lg btn-primary btn-block" th:text="Search">Search</button>
+        <input type="text" id="role" name="role" class="col-md-6" th:placeholder="Search" title=""/>
+        <button type="submit" class="btn  btn-primary col-md-2" th:text="Search">Search</button>
     </form>
 
     <table>
@@ -42,6 +42,7 @@
             <!--<td th:text="${book.isbn}">isbn</td>-->
             <td th:text="${book.yearOfPublishing}">year of publishing</td>
             <td/><div th:each="author : ${book.authors}" th:text="${author.firstName}+' '+${author.lastName}"></div> </td>
+
         </tr>
 
     </table>

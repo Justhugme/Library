@@ -25,11 +25,13 @@
 <div class="container">
     <table>
         <tr>
+            <th></th>
             <th>Name</th>
             <th>Last name</th>
             <th>Information</th>
         </tr>
         <tr th:each="author : ${authors}">
+            <td ><img th:attr="src=${author.image}"  class = "Photo"/></td>
             <td th:text="${author.firstName}"></td>
             <td th:text="${author.lastName}"/>
             <td> <a th:href="@{'author/'+${author.id}}">get information</a></td>

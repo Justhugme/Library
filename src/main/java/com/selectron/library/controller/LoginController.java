@@ -25,7 +25,20 @@ public class LoginController {
     @Autowired
     private RatingService ratingService;
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/user"}, method = RequestMethod.GET)
+    public ModelAndView welcome() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ModelAndView modelAndView = new ModelAndView();
+        if (auth.isAuthenticated()) {
+            User user = userService.findUserByEmail(auth.getName());
+            modelAndView.addObject("user",user);
+            modelAndView.setViewName("User/HomePage");
+        } else
+            modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
