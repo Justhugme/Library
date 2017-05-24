@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Online Library</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Online Library</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 <nav class="top-menu">
-	<ul  class="menu-main">
-		<li><a th:href="@{/login}">Home</a></li>
-		<li><a th:href="@{/login}">Books</a></li>
-		<li><a th:href="@{/login}">Authors</a></li>
-		<li><a th:href="@{/About}">About</a></li>
-		<li><a class="Login" th:href="@{/registration}">Registration</a></li>
-		</li>
-	</ul>
+    <ul class="menu-main">
+        <li><a th:href="@{/login}">Home</a></li>
+        <li><a th:href="@{/About}">About</a></li>
+        <li><a class="Login" th:href="@{/registration}">Registration</a></li>
+        </li>
+    </ul>
 </nav>
 
 
-	<div class="container">
-		<img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-		<form th:action="@{/login}" method="POST" class="form-signin">
-			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br/>
+<div class="container">
+    <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
+    <form th:action="@{/login}" method="POST" class="form-signin">
+        <h3 class="form-signin-heading" th:text="Welcome"></h3>
+        <br/>
 
-			<input type="text" id="email" name="email"  th:placeholder="Email"
-				class="form-control" /> <br/>
-			<input type="password"  th:placeholder="Password"
-				id="password" name="password" class="form-control" /> <br />
+        <input type="text" id="email" name="email" th:placeholder="Email"
+               class="form-control"/> <br/>
+        <input type="password" th:placeholder="Password"
+               id="password" name="password" class="form-control"/> <br/>
 
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-			<a th:href="@{/registration}">Create new account</a>
-		</form>
-	</div>
-<div id="footer">
-    <div class="rights">2017 © All rights reserved</div>
-    <div class="admin">Admin: +380-98-221-2492</div>
+        <div align="center" th:if="${param.error}">
+            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+                th:text="Login"></button>
+        <a th:href="@{/registration}">Create new account</a>
+    </form>
+</div>
+<div id="footer" class="row">
+        <div class="col-xs-1 col-sm-1 col-md-1"></div>
+        <div class=" col-xs-6 col-md-4 rights">2017 © All rights reserved</div>
+        <div class="col-xs-11 col-sm-5 col-md-6 admin">Admin: +380-98-221-2492</div>
+        <div class="col-xs-1 col-sm-1 col-md-1"></div>
 </div>
 </body>
 </html>

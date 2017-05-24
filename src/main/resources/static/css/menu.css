@@ -95,6 +95,7 @@ nav {
 
 
 #footer {
+    display: inline-block;
     margin-top: 20px;
     bottom: 0;
     background: rgb(81, 81, 81);
@@ -102,14 +103,21 @@ nav {
     height: 80px;
     color: rgb(204, 204, 204);
     text-align: center;
-    align-content: flex-end;
+    align-content: center;
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+.foot{
+    align-content: center;
 }
 
 .rights {
-    float: left;
+    /*float: left;*/
+    text-align:left;
     font-size: 15px;
-    margin-left: 100px;
     margin-top: 30px;
+    padding-left: 80px;
     color: #fff;
 }
 .logo {
@@ -118,9 +126,12 @@ nav {
 }
 
 .admin {
-    float: left;
+
+    /*float: left;*/
+    padding-right: 80px;
     font-size: 15px;
-    margin-left: 850px;
+    /*margin-left: 850px;*/
+    text-align: right;
     margin-top: 30px;
     color: #fff;
 }

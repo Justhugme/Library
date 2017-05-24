@@ -41,14 +41,16 @@
             <td th:text="${book.name}">name</td>
             <!--<td th:text="${book.isbn}">isbn</td>-->
             <td th:text="${book.yearOfPublishing}">year of publishing</td>
-            <td/><div th:each="author : ${book.authors}" th:text="${author.firstName}+', '+${author.lastName}"></div> </td>
+            <td/><div th:each="author : ${book.authors}" th:text="${author.firstName}+' '+${author.lastName}"></div> </td>
         </tr>
 
     </table>
 </div>
-<div id="footer">
-    <div class="rights">2017 © All rights reserved</div>
-    <div class="admin">Admin: +380-98-221-2492</div>
+<div id="footer" class="row">
+    <div class="col-xs-1 col-sm-1 col-md-1"></div>
+    <div class=" col-xs-6 col-md-4 rights">2017 © All rights reserved</div>
+    <div class="col-xs-11 col-sm-5 col-md-6 admin">Admin: +380-98-221-2492</div>
+    <div class="col-xs-1 col-sm-1 col-md-1"></div>
 </div>
 </body>
 </html>
