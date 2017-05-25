@@ -29,9 +29,9 @@ public class LoginController {
     public ModelAndView welcome() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
-        if (auth.isAuthenticated()) {
-            User user = userService.findUserByEmail(auth.getName());
-            modelAndView.addObject("user",user);
+        User user = userService.findUserByEmail(auth.getName());
+        if (user != null) {
+            modelAndView.addObject("user", user);
             modelAndView.setViewName("User/HomePage");
         } else
             modelAndView.setViewName("login");

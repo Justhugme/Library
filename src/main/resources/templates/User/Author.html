@@ -26,8 +26,8 @@
 
     <div class="container">
         <form th:object="${author}">
-            <div class="col-md-3 "><img  th:attr="src=${author.image}"/></div>
-            <div class="col-md-offest-9 right">
+            <div class="col-md-4 "><img  th:attr="src=${author.image}"/></div>
+            <div class="col-md-8 right">
                 <div>
                     <p><b>Name: </b> <span th:text="*{firstName} + ' ' + *{lastName}"></span></p>
                 </div>
@@ -39,9 +39,7 @@
                                                   <!--th:text="${book.Name}" th:href="@{'book/id='+${book.id}}"></span></p>-->
                 <!--</div>-->
                 <div> <a target="_blank" th:href="@{${wikiUrl}}" >Detail information</a></div>
-                <div>
-                    <p><b>Date of birth: </b> <span th:text="*{birthdayDate}"></span></p>
-                </div>
+
             </div>
         </form>
 
@@ -54,7 +52,7 @@
                 <th>year</th>
             </tr>
             <tr th:each="book : ${books}">
-                <td><a th:href="@{'/user/book/id='+${book.id}}"><img th:attr="src=${book.icon}"  class = "Photo"  width=52px; height=52px;/></a></td>
+                <td><a th:href="@{'/user/book/id='+${book.id}}"><img th:attr="src=${book.icon}"  class = "Photo"  width=52px; /></a></td>
                 <td th:text="${book.name}">name</td>
                 <!--<td th:text="${book.isbn}">isbn</td>-->
                 <td th:text="${book.yearOfPublishing}">year of publishing</td>

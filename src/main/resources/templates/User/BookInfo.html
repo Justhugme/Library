@@ -30,7 +30,7 @@
                 <p><b>Book: </b> <span th:text="*{Name}"></span></p>
             </div>
             <div>
-                <p><b>Year of publishing: </b> <span th:text="*{yearOfPublishing}"></span></p>
+                <p><b>Publisher: </b> <span th:text="*{publisher} +', '+ *{yearOfPublishing}"></span></p>
             </div>
             <div>
                 <p><b>Authors:</b> <a th:each="author:${book.authors}" th:href="@{'/user/author/'+${author.id}}"> <span
@@ -69,7 +69,7 @@
         <div class="col-md-9">
             <table>
                 <tr th:each="comment : ${book.comments}">
-                    <td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}"></td>
+                    <td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}" class="text-left text-top"></td>
                     <td th:text="'('+${comment.date} + '): '"></td>
                     <td th:text="${comment.content}"></td>
                 </tr>

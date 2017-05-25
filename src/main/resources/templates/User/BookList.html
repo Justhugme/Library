@@ -44,7 +44,7 @@
             <!--<td th:text="${book.isbn}">isbn</td>-->
             <td th:text="${book.yearOfPublishing}">year of publishing</td>
             <td/>
-            <div th:each="author : ${book.authors}" th:text="${author.firstName}+' '+${author.lastName}"></div>
+            <div th:each="author : ${book.authors}"><a th:href="@{'author/'+${author.id}}"  th:text="${author.firstName}+' '+${author.lastName}"></a></div>
             </td>
             <td>
                 <form  th:action="@{/user/WishList/add(BookId=${book.id})}" method="post">
