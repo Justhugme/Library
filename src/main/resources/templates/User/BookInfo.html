@@ -69,9 +69,9 @@
         <div class="col-md-9">
             <table>
                 <tr th:each="comment : ${book.comments}">
-                    <td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}" class="text-left text-top"></td>
-                    <td th:text="'('+${comment.date} + '): '"></td>
-                    <td th:text="${comment.content}"></td>
+                    <h3><td th:text="${comment.user.Name} + ' ' + ${comment.user.lastName}" class=" col-md-2"></td></h3>
+                    <h5><td  th:text="'('+${comment.date} + '): '"></td></h5>
+                    <td th:text="${comment.content}" class="col-md-6"></td>
                 </tr>
             </table>
             <div>
