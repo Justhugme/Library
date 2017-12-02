@@ -24,19 +24,21 @@
 </nav>
 <div class="container">
 
-    <form th:action="@{/user/books/search=}" th:object="${search}" method="post" >
-        <div class="col-md-12">
-        <input type="text" id="role" name="role" class="col-md-6" th:placeholder="Search" title=""/>
-        <button type="submit" class="btn  btn-primary col-md-2 btn-sm" th:text="Search">Search</button>
+    <form th:action="@{/user/books/search=}" th:object="${search}" method="post">
+        <div class="row">
+            <input type="text" id="role" name="role" class="form-control col-md-8" style="width: 66%" th:placeholder="Search" title=""/>
+            <div class="col-xs-1"></div>
+            <button type="submit" class="btn  btn-info col-md-1 btn-md" th:text="Search">Search</button>
         </div>
     </form>
     <hr>
-    <table class="col-md-9">
+    <table class="col-md-11" >
         <tr>
             <th></th>
-            <th>NAME</th>
+            <th>name</th>
             <th>year</th>
-            <th>Authors</th>
+            <th width="40 px"></th>
+            <th>authors</th>
         </tr>
         <tr th:each="book : ${books}">
             <td><a th:href="@{'book/id='+${book.id}}"><img th:attr="src=${book.icon}" class="Photo"/></a></td>
@@ -44,11 +46,12 @@
             <!--<td th:text="${book.isbn}">isbn</td>-->
             <td th:text="${book.yearOfPublishing}">year of publishing</td>
             <td/>
-            <div th:each="author : ${book.authors}"><a th:href="@{'author/'+${author.id}}"  th:text="${author.firstName}+' '+${author.lastName}"></a></div>
+            <td>
+            <div th:each="author : ${book.authors}"><a th:href="@{'author/'+${author.id}}" th:text="${author.firstName}+' '+${author.lastName}"></a></div>
             </td>
             <td>
-                <form  th:action="@{/user/WishList/add(BookId=${book.id})}" method="post">
-                    <button class="btn btn-primary btn-xs" type="Submit">Add to wish list</button>
+                <form th:action="@{/user/WishList/add(BookId=${book.id})}" method="post">
+                    <button class="btn btn-primary btn-lg" type="Submit">Add to wish list</button>
                 </form>
             </td>
 

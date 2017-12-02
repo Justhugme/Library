@@ -1,10 +1,8 @@
-img{
-    width: 62px;
-    height: 62px;
-}
 
 img{
     max-width: 250px;
+    width: 100px;
+    height: 100px;
 }
 
 th {
@@ -20,6 +18,9 @@ td {
     line-height: 1.5;
     padding: 0.75em;
     text-align: left;
+    border-bottom: 8px solid #dddddd;
+    font-family: "Times New Roman", serif;
+    font-size: 150%;
 }
 table {
     border-collapse: collapse;
